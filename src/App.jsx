@@ -40,20 +40,20 @@ const INTERIOR_IMAGES = [
 
 function InteriorShowcase({ scrollContainerRef }) {
   const { scrollYProgress } = useScroll({ container: scrollContainerRef });
-  
+
   const y1 = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
   const y2 = useTransform(scrollYProgress, [0, 1], ['0%', '-15%']);
   const y3 = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  
+
   return (
     <div style={{ position: 'relative', width: '100vw', padding: '100px 0 200px', display: 'flex', flexDirection: 'column', gap: '120px', alignItems: 'center', backgroundColor: '#050505', overflow: 'hidden' }}>
       <div style={{ textAlign: 'center', marginBottom: '40px', zIndex: 20 }}>
         <h2 className="brand-wordmark" style={{ fontSize: '2rem' }}>INTERIOR</h2>
         <p className="brand-subtitle">UNCOMPROMISING LUXURY</p>
       </div>
-      
+
       {INTERIOR_IMAGES.map((item, i) => (
-        <motion.div 
+        <motion.div
           key={i}
           initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
           whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
@@ -76,14 +76,14 @@ function InteriorShowcase({ scrollContainerRef }) {
           <div style={{ flex: '0 0 70%' }}>
             <img src={item.src} alt="Interior" style={{ width: '100%', height: 'auto', borderRadius: '16px', boxShadow: '0 30px 60px rgba(0,0,0,0.8)' }} />
           </div>
-          
+
           <div style={{ flex: '1', textAlign: i % 2 === 0 ? 'left' : 'right' }}>
             <h3 className="brand-wordmark" style={{ fontSize: '1.2rem', marginBottom: '12px', letterSpacing: '0.3em' }}>{item.title}</h3>
             <p className="brand-subtitle" style={{ fontSize: '0.75rem', color: '#888', letterSpacing: '0.2em', lineHeight: '1.6' }}>{item.desc}</p>
           </div>
         </motion.div>
       ))}
-      
+
       {/* Background ambient lighting for interior section */}
       <div style={{ position: 'absolute', top: '20%', left: '10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%)', filter: 'blur(40px)', zIndex: 1, pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%)', filter: 'blur(40px)', zIndex: 1, pointerEvents: 'none' }} />
@@ -138,15 +138,15 @@ export default function App() {
 
   return (
     <div ref={scrollContainerRef} style={{ height: '100vh', width: '100vw', overflowY: 'auto', overflowX: 'hidden', backgroundColor: '#050505', scrollBehavior: 'smooth' }}>
-      
+
       {/* Global Spreading Blurred Gradient Blob (Follows cursor everywhere) */}
       <motion.div
         style={{
           position: 'fixed',
-          top: -250, 
-          left: -250, 
-          width: 500, 
-          height: 500, 
+          top: -250,
+          left: -250,
+          width: 500,
+          height: 500,
           borderRadius: '50%',
           background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0) 70%)',
           pointerEvents: 'none',
@@ -157,7 +157,7 @@ export default function App() {
           filter: 'blur(40px)' // Extreme blur to make it spread smoothly
         }}
       />
-      
+
       {/* iOS Glassmorphism Navigation Tabs */}
       <AnimatePresence>
         {!showIntro && (
@@ -211,155 +211,155 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <div 
-        className="app-container" 
+      <div
+        className="app-container"
         style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden', backgroundColor: '#050505' }}
       >
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          opacity: 0.15, // Reduced opacity
-          filter: 'blur(12px)', // Diffusion blur
-          pointerEvents: 'none'
-        }}
-      >
-        <source src="/bg.mp4" type="video/mp4" />
-      </video>
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 0.15, // Reduced opacity
+            filter: 'blur(12px)', // Diffusion blur
+            pointerEvents: 'none'
+          }}
+        >
+          <source src={`${import.meta.env.BASE_URL}bg.mp4`} type="video/mp4" />
+        </video>
 
-      {/* 2D Image Display */}
-      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentIndex}
-            src={IMAGES[currentIndex].src}
-            alt={IMAGES[currentIndex].label}
-            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // smooth ease out
-            style={{ 
-              maxWidth: '80%', 
-              maxHeight: '80%', 
-              objectFit: 'contain',
-              filter: getFilter(),
-              transition: 'filter 0.5s ease',
-              position: 'absolute'
-            }}
-          />
-        </AnimatePresence>
-      </div>
-
-      {/* UI Overlay */}
-      <AnimatePresence>
-        {!showIntro && (
-          <motion.div
-            initial={{ opacity: 0, filter: 'blur(15px)', y: 20 }}
-            animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-            exit={{ opacity: 0, filter: 'blur(10px)', y: -10 }}
-            transition={{ duration: 1.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-          >
-          {/* Header */}
-          <div style={{ position: 'absolute', top: '40px', left: '40px', pointerEvents: 'auto' }}>
-            <h1 className="brand-wordmark">TOYOTA</h1>
-            <p className="brand-subtitle">Land Cruiser Concept</p>
-          </div>
-
-          {/* Camera Presets (Bottom Center) */}
-          <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '16px', background: 'rgba(0,0,0,0.6)', padding: '12px 24px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)', pointerEvents: 'auto' }}>
-            {IMAGES.map((img, idx) => (
-              <button 
-                key={idx}
-                className="camera-preset-btn"
-                style={{ opacity: currentIndex === idx ? 1 : 0.5 }}
-                onClick={() => setCamera(idx)}
-              >
-                {img.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Configurator Panel (Right Side) */}
-          <div className="ui-panel" style={{ position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', width: '220px', pointerEvents: 'auto' }}>
-            <h3 className="config-heading">Color Configurator</h3>
-            
-            <div style={{ marginBottom: '24px' }}>
-              <p className="spec-text" style={{ fontSize: '10px', marginBottom: '8px', opacity: 0.5 }}>BODY COLOR</p>
-              {['Lunar Silver', 'Graphite Black', 'Arctic White'].map(color => (
-                <div 
-                  key={color} 
-                  className={`config-option ${bodyColor === color ? 'active' : ''}`}
-                  onClick={() => setBodyColor(color)}
-                >
-                  <div style={{ 
-                    width: '16px', height: '16px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)',
-                    background: color === 'Lunar Silver' ? '#c0c0c0' : color === 'Graphite Black' ? '#222' : '#fff'
-                  }} />
-                  {color}
-                </div>
-              ))}
-            </div>
-
-            <div>
-              <p className="spec-text" style={{ fontSize: '10px', marginBottom: '8px', opacity: 0.5 }}>BRAKE CALIPERS</p>
-              {['Brembo Red', 'Stealth Black'].map(color => (
-                <div 
-                  key={color} 
-                  className={`config-option ${caliperColor === color ? 'active' : ''}`}
-                  onClick={() => setCaliperColor(color)}
-                >
-                  <div style={{ 
-                    width: '16px', height: '16px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)',
-                    background: color === 'Brembo Red' ? '#cc0000' : '#111'
-                  }} />
-                  {color}
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Intro Video Overlay */}
-      <AnimatePresence>
-        {showIntro && (
-          <motion.div
-            exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.05 }}
-            transition={{ duration: 2, ease: [0.25, 1, 0.5, 1] }}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 50,
-              backgroundColor: '#000',
-              pointerEvents: 'none'
-            }}
-          >
-            <video
-              autoPlay
-              muted
-              playsInline
-              onEnded={() => setShowIntro(false)}
+        {/* 2D Image Display */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentIndex}
+              src={IMAGES[currentIndex].src}
+              alt={IMAGES[currentIndex].label}
+              initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // smooth ease out
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
+                maxWidth: '80%',
+                maxHeight: '80%',
+                objectFit: 'contain',
+                filter: getFilter(),
+                transition: 'filter 0.5s ease',
+                position: 'absolute'
+              }}
+            />
+          </AnimatePresence>
+        </div>
+
+        {/* UI Overlay */}
+        <AnimatePresence>
+          {!showIntro && (
+            <motion.div
+              initial={{ opacity: 0, filter: 'blur(15px)', y: 20 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              exit={{ opacity: 0, filter: 'blur(10px)', y: -10 }}
+              transition={{ duration: 1.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
+            >
+              {/* Header */}
+              <div style={{ position: 'absolute', top: '40px', left: '40px', pointerEvents: 'auto' }}>
+                <h1 className="brand-wordmark">TOYOTA</h1>
+                <p className="brand-subtitle">Land Cruiser Concept</p>
+              </div>
+
+              {/* Camera Presets (Bottom Center) */}
+              <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '16px', background: 'rgba(0,0,0,0.6)', padding: '12px 24px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)', pointerEvents: 'auto' }}>
+                {IMAGES.map((img, idx) => (
+                  <button
+                    key={idx}
+                    className="camera-preset-btn"
+                    style={{ opacity: currentIndex === idx ? 1 : 0.5 }}
+                    onClick={() => setCamera(idx)}
+                  >
+                    {img.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Configurator Panel (Right Side) */}
+              <div className="ui-panel" style={{ position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', width: '220px', pointerEvents: 'auto' }}>
+                <h3 className="config-heading">Color Configurator</h3>
+
+                <div style={{ marginBottom: '24px' }}>
+                  <p className="spec-text" style={{ fontSize: '10px', marginBottom: '8px', opacity: 0.5 }}>BODY COLOR</p>
+                  {['Lunar Silver', 'Graphite Black', 'Arctic White'].map(color => (
+                    <div
+                      key={color}
+                      className={`config-option ${bodyColor === color ? 'active' : ''}`}
+                      onClick={() => setBodyColor(color)}
+                    >
+                      <div style={{
+                        width: '16px', height: '16px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)',
+                        background: color === 'Lunar Silver' ? '#c0c0c0' : color === 'Graphite Black' ? '#222' : '#fff'
+                      }} />
+                      {color}
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <p className="spec-text" style={{ fontSize: '10px', marginBottom: '8px', opacity: 0.5 }}>BRAKE CALIPERS</p>
+                  {['Brembo Red', 'Stealth Black'].map(color => (
+                    <div
+                      key={color}
+                      className={`config-option ${caliperColor === color ? 'active' : ''}`}
+                      onClick={() => setCaliperColor(color)}
+                    >
+                      <div style={{
+                        width: '16px', height: '16px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)',
+                        background: color === 'Brembo Red' ? '#cc0000' : '#111'
+                      }} />
+                      {color}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Intro Video Overlay */}
+        <AnimatePresence>
+          {showIntro && (
+            <motion.div
+              exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.05 }}
+              transition={{ duration: 2, ease: [0.25, 1, 0.5, 1] }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                zIndex: 50,
+                backgroundColor: '#000',
+                pointerEvents: 'none'
               }}
             >
-              <source src="/intro.mp4" type="video/mp4" />
-            </video>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <video
+                autoPlay
+                muted
+                playsInline
+                onEnded={() => setShowIntro(false)}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              >
+                <source src={`${import.meta.env.BASE_URL}intro.mp4`} type="video/mp4" />
+              </video>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div> {/* End of app-container */}
 
       {/* Marketing Landing Page Sections */}
