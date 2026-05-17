@@ -1,0 +1,122 @@
+:root {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  background-color: #0a0a0a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Typography styles */
+.hotspot-label {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: white;
+  font-size: 11px;
+}
+
+.camera-preset-btn {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+.camera-preset-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.config-heading {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 9px;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.config-option {
+  font-weight: 400;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color 0.3s ease;
+}
+.config-option:hover, .config-option.active {
+  color: white;
+}
+
+.terrain-toggle {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.terrain-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.brand-wordmark {
+  font-weight: 800;
+  letter-spacing: 0.4em;
+  font-size: 24px;
+  margin: 0;
+}
+
+.brand-subtitle {
+  font-weight: 100;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 4px 0 0 0;
+}
+
+.spec-text {
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  color: white;
+}
+
+/* UI Panels */
+.ui-panel {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.hotspot-dot {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.hotspot-dot:hover {
+  transform: scale(1.5);
+}
